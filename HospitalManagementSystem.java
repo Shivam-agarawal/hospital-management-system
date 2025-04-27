@@ -3,6 +3,7 @@ import java.util.*;
 public class HospitalManagementSystem {
     private static List<Patient> patients = new ArrayList<>();
     private static List<Doctor> doctors = new ArrayList<>();
+    private static List<Appointment> appointments = new ArrayList<>();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -25,7 +26,9 @@ public class HospitalManagementSystem {
                 case 2: viewPatients(); break;
                 case 3: addDoctor(); break;
                 case 4: viewDoctors(); break;
-                case 5: System.exit(0);
+                case 5: addAppointment(); break;
+                case 6: viewAppointments(); break;
+                case 7: System.exit(0);
                 default: System.out.println("Invalid option!");
             }
         }
@@ -74,6 +77,30 @@ public class HospitalManagementSystem {
         } else {
             for (Doctor d : doctors) {
                 System.out.println(d);
+            }
+        }
+    }
+
+    private static void addAppointment() {
+        System.out.print("Enter Appointment ID: ");
+        int id = scanner.nextInt();
+        System.out.print("Enter Patient ID: ");
+        int patientId = scanner.nextInt();
+        System.out.print("Enter Doctor ID: ");
+        int doctorId = scanner.nextInt();
+        scanner.nextLine(); // consume newline
+        System.out.print("Enter Date (YYYY-MM-DD): ");
+        String date = scanner.nextLine();
+        appointments.add(new Appointment(id, patientId, doctorId, date));
+        System.out.println("Appointment added successfully!");
+    }
+
+    private static void viewAppointments() {
+        if (appointments.isEmpty()) {
+            System.out.println("No appointments found.");
+        } else {
+            for (Appointment a : appointments) {
+                System.out.println(a);
             }
         }
     }
